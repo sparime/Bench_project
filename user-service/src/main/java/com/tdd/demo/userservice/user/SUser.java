@@ -53,4 +53,5 @@ public class SUser {
                 ", username='" + username + '\'' +
                 '}';
     }
+
 }
