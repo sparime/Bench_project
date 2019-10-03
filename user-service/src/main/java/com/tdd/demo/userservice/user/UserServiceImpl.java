@@ -18,14 +18,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SUser saveUser(SUser user) {
+    public int saveUser(SUser user) {
         try{
             userRepository.save(user);
         }
         catch (Exception e){
             throw new RuntimeException("User not saved");
         }
-        return user;
+        return user.getId();
     }
 
     @Override

@@ -33,17 +33,28 @@ public class UserRepositoryIntegrationTest {
 
     }
 
-//    @Test
-//    public void findSUerById_thenReturnUser(){
-//        SUser user = new SUser("test_user_id");
-//        user.setId(999);
-//        entityManager.persist(user);
-//        entityManager.flush();
-//
-//        Optional<SUser> found = userRepository.findById(999);
-//        assertThat(found).isNotNull();
-//
-//    }
+    @Test
+    public void saveUser_thenReturnGeneratedId() {
+        SUser user = new SUser("save user test");
+        entityManager.persistAndFlush(user);
+
+        SUser found = userRepository.findSUserByUsername(user.getUsername());
+        // then
+        assertThat(found.getUsername()).isEqualTo(user.getUsername());
+
+    }
+
+    @Test
+    public void deleteUser_thenReturnDeletedUserId() {
+        SUser user = new SUser("To be deleted");
+        entityManager.persistAndFlush(user);
+
+        SUser found = userRepository.findSUserByUsername(user.getUsername());
+        // now delete
+        userRepository.delete(found);
+        assertThat(userRepository.findSUserByUsername(user.getUsername())).isNull();
+
+    }
 
 
 }
