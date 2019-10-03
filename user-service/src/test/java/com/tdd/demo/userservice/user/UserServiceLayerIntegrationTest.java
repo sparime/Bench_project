@@ -57,6 +57,25 @@ public class UserServiceLayerIntegrationTest {
         int id = userService.saveUser(user);
         assertThat(id).isEqualTo(101);
 
+    }
+
+    @Test
+    public void whenDeleted_thenReturnId() {
+        SUser user = new SUser("user save");
+        user.setId(101);
+
+        int id = userService.deleteUser(user.getId());
+        assertThat(id).isEqualTo(101);
+
+    }
+
+    @Test
+    public void whenUpdated_thenReturnUpdatedObject() {
+        String name = "Service layer testing user";
+        SUser found = userService.getUserByName(name);
+
+        SUser updated = userService.updateUserName(found, "updated user name ");
+        assertThat(updated.getId()).isEqualTo(found.getId());
 
     }
 

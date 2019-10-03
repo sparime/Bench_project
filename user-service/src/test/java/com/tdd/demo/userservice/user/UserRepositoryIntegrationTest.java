@@ -53,7 +53,7 @@ public class UserRepositoryIntegrationTest {
 
         SUser found = userRepository.findSUserByUsername(user.getUsername());
         // now delete
-        userRepository.deleteSUserById(found.getId());
+        userRepository.deleteById(found.getId());
         assertThat(userRepository.findSUserByUsername(user.getUsername())).isNull();
 
     }

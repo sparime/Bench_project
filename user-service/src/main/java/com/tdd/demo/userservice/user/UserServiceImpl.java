@@ -34,18 +34,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteUser(SUser user) {
+    public int deleteUser(int userId) {
         try {
-            userRepository.deleteSUserById(user.getId());
+            userRepository.deleteById(userId);
         } catch (Exception e) {
             throw new RuntimeException(" User does not exist");
         }
-        return user.getId();
+        return userId;
     }
 
     @Override
-    public SUser updateUserName(SUser user) {
-        return null;
+    public SUser updateUserName(SUser user, String updatedName) {
+        try {
+            user.setUsername(updatedName);
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new RuntimeException("user cannot be found");
+        }
+        return user;
+    }
+
+    @Override
+    public boolean exists(SUser user) {
+        return userRepository.exists(user);
     }
 
 

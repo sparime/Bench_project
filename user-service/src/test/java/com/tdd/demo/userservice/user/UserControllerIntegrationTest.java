@@ -1,5 +1,6 @@
 package com.tdd.demo.userservice.user;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,6 +36,15 @@ public class UserControllerIntegrationTest   {
 
     @MockBean
     private UserRepository userRepository;
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @TestConfiguration
     static class UserControllerTestContextConfiguration {
 
@@ -45,6 +55,7 @@ public class UserControllerIntegrationTest   {
        }
    }
 
+    /* Get mapping test cases */
     @Test
     public void givenUsers_whenUsers_returnAllUsersJsonArray() throws Exception{
         SUser user = new SUser("test_user");
@@ -57,22 +68,31 @@ public class UserControllerIntegrationTest   {
                 andExpect(jsonPath("$.*", hasSize(1)));
     }
 
-    /*@Test
+    /* Post Mapping test cases*/
+    @Test
     public void saveAUser_thenReturnTheSavedUser()throws Exception{
 
-        when(userService.saveUser(any(SUser.class))).thenReturn(new SUser("posted_user"));
+        SUser user = new SUser("Control_test");
+        when(userRepository.exists(user)).thenReturn(false);
 
-        mockmvc.perform(post("users").
-                contentType(MediaType.APPLICATION_JSON).
-                content("{ username: posted_user} ").
-                accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().isCreated()).
-                andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).
-                andExpect(header().string("Location", "/users/posted_user")).
-                andExpect(jsonPath("$"))
+        // this works only when when(mocked bean). some void method
+        //doNothing().doThrow(new RuntimeException()).when(userRepository).save(user);
+
+        mockmvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(user)))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("location", containsString("http://localhost/users")));
+
+        // check for cleanup calls - this only works when userService is a mockbean. will add support for this later
+        //verify(userService, times(1)).exists(user);
+        //verify(userService, times(1)).saveUser(user);
+        //verifyNoMoreInteractions(userService);
+
+    }
+
+    /* Delete mapping test cases*/
 
 
-    }*/
-
-
+    /* Update mapping tset cases*/
 }

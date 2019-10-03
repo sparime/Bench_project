@@ -9,7 +9,9 @@ public interface UserService {
 
     List<SUser> getAllUsers();
 
-    int deleteUser(SUser user);
+    int deleteUser(int userId);
 
-    SUser updateUserName(SUser user);
+    SUser updateUserName(SUser user, String updatedName);
+
+    boolean exists(SUser user);
 }
