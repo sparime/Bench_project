@@ -8,6 +8,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 // JPA test class
@@ -51,9 +53,24 @@ public class UserRepositoryIntegrationTest {
 
         SUser found = userRepository.findSUserByUsername(user.getUsername());
         // now delete
-        userRepository.delete(found);
+        userRepository.deleteSUserById(found.getId());
         assertThat(userRepository.findSUserByUsername(user.getUsername())).isNull();
 
+    }
+
+    @Test
+    public void updateUsername_thenReturnTheUpdatedUserObject() {
+        // 10 is a hardcoded test case value
+        Optional<SUser> found = userRepository.findById(10);
+        SUser fromDb = found.orElse(null);
+
+        // update
+        if (fromDb != null) {
+            fromDb.setUsername("Updated name");
+        }
+
+        entityManager.persistAndFlush(fromDb);
+        assertThat(fromDb.getId()).isEqualTo(10);
     }
 
 

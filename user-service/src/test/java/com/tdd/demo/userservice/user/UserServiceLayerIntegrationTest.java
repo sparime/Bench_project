@@ -48,5 +48,16 @@ public class UserServiceLayerIntegrationTest {
     }
 
 
+    @Test
+    public void whenSaved_thenReturnId() {
+
+        SUser user = new SUser("user save");
+        user.setId(101);
+
+        int id = userService.saveUser(user);
+        assertThat(id).isEqualTo(101);
+
+
+    }
 
 }

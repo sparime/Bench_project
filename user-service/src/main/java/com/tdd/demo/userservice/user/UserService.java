@@ -8,4 +8,8 @@ public interface UserService {
     int saveUser(SUser user);
 
     List<SUser> getAllUsers();
+
+    int deleteUser(SUser user);
+
+    SUser updateUserName(SUser user);
 }

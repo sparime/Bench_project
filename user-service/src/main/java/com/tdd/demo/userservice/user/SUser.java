@@ -14,11 +14,11 @@ import javax.persistence.Table;
 @ApiModel(description = "User class")
 public class SUser {
 
-
-    @GeneratedValue()
+    @Id
+    @GeneratedValue
     private int id;
     @ApiModelProperty("Cannot be an empty string")
-    @Id
+
     private String username;
 
 
