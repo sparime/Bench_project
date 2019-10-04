@@ -15,6 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 public class PostServiceLayerIntegrationTest {
 
+    // stubbed post and mocked postRepo to test postService
+
     @MockBean
     private PostRepository postRepository;
     @Autowired
