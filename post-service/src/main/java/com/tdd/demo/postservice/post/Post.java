@@ -21,6 +21,12 @@ public class Post {
         this.postContent = postContent;
     }
 
+    public Post(int postId, int userId, String postContent) {
+        this.userId = userId;
+        this.postContent = postContent;
+        this.postId = postId;
+    }
+
     protected Post() {
     }
 
@@ -56,4 +62,5 @@ public class Post {
                 ", postContent='" + postContent + '\'' +
                 '}';
     }
+
 }
