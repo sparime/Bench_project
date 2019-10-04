@@ -1,9 +1,9 @@
 package com.tdd.demo.postservice.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class PostServiceImpl implements PostService {
 
     @Autowired
@@ -11,28 +11,30 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findById(int id) {
+        Post fromDb;
         try {
-            return postRepository.findById(id).orElse(null);
+            fromDb = postRepository.findPostByPostId(id);
         } catch (Exception e) {
             throw new RuntimeException("user not present");
         }
+        return fromDb;
     }
 
     @Override
     public int savePost(Post post) {
         try {
-            Post saved = postRepository.saveAndFlush(post);
-            return saved.getPostId();
+            postRepository.save(post);
         } catch (Exception e) {
             throw new RuntimeException("Could not be saved");
         }
+        return post.getPostId();
     }
 
     @Override
     public int updatePost(Post post) {
         try {
             postRepository.saveAndFlush(post);
-            return postRepository.findById(post.getPostId()).orElse(null).getPostId();
+            return postRepository.findPostByPostId(post.getPostId()).getPostId();
         } catch (Exception e) {
             throw new RuntimeException("Could not update");
         }
@@ -47,5 +49,20 @@ public class PostServiceImpl implements PostService {
         } catch (Exception e) {
             throw new RuntimeException("Could not delete user");
         }
+    }
+
+    @Override
+    public Post findByContent(String content) {
+        try {
+            return postRepository.findPostByPostContent(content);
+        } catch (Exception e) {
+            throw new RuntimeException("user not present");
+        }
+
+    }
+
+    @Override
+    public boolean exists(int postId) {
+        return postRepository.existsById(postId);
     }
 }

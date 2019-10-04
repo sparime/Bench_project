@@ -22,7 +22,7 @@ public class PostRepositoryIntegrationTest {
     public void findByPostId_thenReturnPost() {
 
         //  optional.findFirst.orELse to get the actual object
-        Post found = postRepository.findById(1).orElse(null);
+        Post found = postRepository.findById(10).orElse(null);
         assertThat(found.getPostContent()).isEqualToIgnoringCase("first_post");
 
     }
@@ -34,7 +34,7 @@ public class PostRepositoryIntegrationTest {
         entityManager.persistAndFlush(newPost);
 
         // can write a better test
-        Post fromDb = postRepository.findPostByPostContent("saved_post").orElse(null);
+        Post fromDb = postRepository.findPostByPostContent("saved_post");
         assertThat(fromDb.getPostContent()).isEqualToIgnoringCase("saved_post");
 
     }

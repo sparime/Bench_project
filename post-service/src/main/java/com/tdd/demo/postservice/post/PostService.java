@@ -1,8 +1,6 @@
 package com.tdd.demo.postservice.post;
 
-import org.springframework.stereotype.Service;
-
-@Service
+//@Service
 public interface PostService {
     // add methods here
     Post findById(int id);
@@ -12,4 +10,8 @@ public interface PostService {
     int updatePost(Post post);
 
     int deletePost(int id);
+
+    Post findByContent(String content);
+
+    boolean exists(int postId);
 }
