@@ -9,5 +9,6 @@ Origin
  * Zipkin <br>
  * Spring cloud bus <br>
  * Circuit breaker pattern with Hystrix <br>
- * Custom exception handling 
+ * Custom exception handling
+ * Auth using JWT 
  ## Spring cloud messaging demo

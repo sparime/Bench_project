@@ -10,6 +10,7 @@
         <module name="post-service" />
         <module name="Eureka-naming-server" />
         <module name="login-service" />
+        <module name="Zuul-api-gateway-server" />
         <module name="user-service" />
       </profile>
     </annotationProcessing>
@@ -17,6 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Eureka-naming-server" options="-parameters" />
+      <module name="Zuul-api-gateway-server" options="-parameters" />
       <module name="login-service" options="-parameters" />
       <module name="post-service" options="-parameters" />
       <module name="user-service" options="-parameters" />

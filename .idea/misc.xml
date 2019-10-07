@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/user-service/pom.xml" />
         <option value="$PROJECT_DIR$/login-service/pom.xml" />
         <option value="$PROJECT_DIR$/Eureka-naming-server/pom.xml" />
+        <option value="$PROJECT_DIR$/Zuul-api-gateway-server/pom.xml" />
       </list>
     </option>
   </component>
