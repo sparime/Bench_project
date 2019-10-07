@@ -1,7 +1,7 @@
 # Bench_project
 Origin
 ## TODO
- * Eureka naming server <br>
+ * ~~Eureka naming server~~
  * ~~Feign Client config~~
  * ~~Client side load balancing with Ribbon~~
  * Zuul API gateway
