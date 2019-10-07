@@ -3,7 +3,7 @@ Origin
 ## TODO
  * Eureka naming server <br>
  * ~~Feign Client config~~
- * Client side load balancing with Ribbon <br>
+ * ~~Client side load balancing with Ribbon~~
  * Zuul API gateway
  * Distributed tracing with spring cloud sleuth <br>
  * Zipkin <br>

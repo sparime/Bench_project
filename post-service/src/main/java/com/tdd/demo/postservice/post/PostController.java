@@ -58,7 +58,8 @@ public class PostController {
     @GetMapping("/users/{userId}/posts/")
     public List<Post> getAllPostsOfAllUser(@PathVariable("userId") int userId) {
 
-        logger.info("{userID from user service ->}", userId);
+        logger.info("{}", userId);
+        logger.info("{}", "" + environment.getProperty("local.server.port"));
         return postService.findAllByUserId(userId);
 
     }

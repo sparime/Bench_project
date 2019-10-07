@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients("com.tdd.demo.postservice")
 @SpringBootApplication
+
 public class PostServiceApplication {
 
 	public static void main(String[] args) {
