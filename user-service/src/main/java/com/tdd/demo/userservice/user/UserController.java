@@ -1,5 +1,6 @@
 package com.tdd.demo.userservice.user;
 
+import com.tdd.demo.userservice.PostServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,8 @@ public class UserController {
     // need to have a DAO and JPA repo to autowire and run tests
     @Autowired
     private UserService userService;
+    @Autowired
+    private PostServiceProxy proxy;
 
     // gets
     @GetMapping("/users")
@@ -63,5 +66,9 @@ public class UserController {
 
     }
 
-
+    @GetMapping("/users/{userId}/posts/")
+    public List<PostBean> getAllPostsOfAllUser(@PathVariable("userId") int userId) {
+        List<PostBean> response = proxy.getAllPostsOfAllUser(userId);
+        return response;
+    }
 }

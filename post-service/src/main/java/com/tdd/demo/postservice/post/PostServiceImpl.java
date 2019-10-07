@@ -3,6 +3,8 @@ package com.tdd.demo.postservice.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -64,5 +66,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public boolean exists(int postId) {
         return postRepository.existsById(postId);
+    }
+
+    @Override
+    public List<Post> findAllByUserId(int userId) {
+        return postRepository.findAllByUserId(userId);
     }
 }

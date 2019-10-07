@@ -1,5 +1,7 @@
 package com.tdd.demo.postservice.post;
 
+import java.util.List;
+
 //@Service
 public interface PostService {
     // add methods here
@@ -14,4 +16,6 @@ public interface PostService {
     Post findByContent(String content);
 
     boolean exists(int postId);
+
+    List<Post> findAllByUserId(int userId);
 }

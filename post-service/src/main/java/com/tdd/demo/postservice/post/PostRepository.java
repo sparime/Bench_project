@@ -3,6 +3,8 @@ package com.tdd.demo.postservice.post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
     Post findPostByPostContent(String post_content);
@@ -10,4 +12,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     Post findPostByPostId(int id);
 
     Post save(Post post);
+
+    List<Post> findAllByUserId(int userId);
+
 }

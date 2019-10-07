@@ -15,13 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PostController.class)
@@ -53,6 +53,7 @@ public class PostControllerTest {
         when(postService.findByContent("Service layer test post")).thenReturn(post);
         when(postService.savePost(post)).thenReturn(post.getPostId());
         when(postService.exists(post.getPostId())).thenReturn(true);
+        when(postService.deletePost((post.getPostId()))).thenReturn(post.getPostId());
 
     }
 
@@ -91,5 +92,43 @@ public class PostControllerTest {
     }
 
     // delete mapping test cases
+    @Test
+    public void deletePostById_thenReturnPostId() throws Exception {
+        Post post = new Post(12, 10, "Service layer test post");
+        mockmvc.perform((delete("/posts/{id}", 12))).
+                andExpect(status().isOk()).
+                andExpect(jsonPath("$", is(12)));
+
+
+    }
+
+    // put mapping
+    @Test
+    public void savePost_thenReturnPostId() throws Exception {
+        Post post = new Post(10, "Service layer test post");
+
+        mockmvc.perform(post("/posts").
+                contentType(MediaType.APPLICATION_JSON).
+                content(asJsonString(post))).
+                andExpect(status().isCreated()).
+                andExpect(header().string("location", containsString("http://localhost/posts")));
+
+    }
+
+    @Test
+    public void updatePost_thenReturnPostId() throws Exception {
+        Post post = new Post(10, "Service layer test post");
+
+        mockmvc.perform(put("/posts").
+                contentType(MediaType.APPLICATION_JSON).
+                content(asJsonString((post)))).
+                andExpect(status().isOk()).
+                andExpect(header().string("location", containsString("http://localhost/posts")));
+
+
+    }
+
+
+
 
 }
