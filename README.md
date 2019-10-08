@@ -1,6 +1,8 @@
 # Bench_project
 Origin
+
 ## TODO
+ * ~~Micro-services in TDD~~
  * ~~Eureka naming server~~
  * ~~Feign Client config~~
  * ~~Client side load balancing with Ribbon~~
@@ -9,8 +11,9 @@ Origin
  * ~~Zipkin with Rabbit MQ~~
  * Spring cloud bus <br>
  * ~~Circuit breaker pattern with Hystrix~~ <br>
- * Custom exception handling
- * Auth using JWT <br>
+ * Custom exception handling - Deferred
+ * Auth using JWT - Deferred <br>
+ * Spring cloud messaging demo - Deferred
  <p>
  Note: <br>
  * Download Zipkin jar and place in project root and run it using: RABBIT_URI=amqp://localhost java -jar Zipkin.jar<br>
@@ -18,4 +21,4 @@ Origin
  * Hystrix demo on URI: users/users-hystrix-demo
  </p>
  
- ## Spring cloud messaging demo
+ ## 
