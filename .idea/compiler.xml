@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="login-service" />
         <module name="post-service" />
-        <module name="Zipkin-client-application" />
         <module name="user-service" />
         <module name="Zuul-api-gateway-server" />
         <module name="Eureka-naming-server" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Zipkin-client-application" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
