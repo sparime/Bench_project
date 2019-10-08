@@ -5,7 +5,7 @@ Origin
  * ~~Feign Client config~~
  * ~~Client side load balancing with Ribbon~~
  * ~~Zuul API gateway~~
- * Distributed tracing with spring cloud sleuth <br>
+ * ~~Distributed tracing with spring cloud sleuth~~ <br>
  * Zipkin <br>
  * Spring cloud bus <br>
  * Circuit breaker pattern with Hystrix <br>

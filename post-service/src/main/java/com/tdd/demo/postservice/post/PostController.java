@@ -18,6 +18,7 @@ public class PostController {
     private PostService postService;
     @Autowired
     private Environment environment;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/posts/{id}")
@@ -60,7 +61,10 @@ public class PostController {
 
         logger.info("{}", userId);
         logger.info("{}", "" + environment.getProperty("local.server.port"));
-        return postService.findAllByUserId(userId);
+        List<Post> res = postService.findAllByUserId(userId);
+        // comment the following line out - only for debugging
+        logger.info("post object -> {}", res);
+        return res;
 
     }
 
