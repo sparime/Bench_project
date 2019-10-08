@@ -12,7 +12,8 @@ public class ZuulApiGatewayServerApplication {
 
     // to run a request through Zuul API server
     // http://localhost:8765/{app name}/{uri}
-    // eg: http://localhost:8765/user-service/users/10/posts/
+    // eg: http://localhost:8765/user-service/users/20/posts/
+
     public static void main(String[] args) {
         SpringApplication.run(ZuulApiGatewayServerApplication.class, args);
     }

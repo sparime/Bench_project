@@ -55,7 +55,7 @@ public class PostController {
 
     }
 
-    @GetMapping("/users/{userId}/posts/")
+    @GetMapping("users/{userId}/posts/")
     public List<Post> getAllPostsOfAllUser(@PathVariable("userId") int userId) {
 
         logger.info("{}", userId);
