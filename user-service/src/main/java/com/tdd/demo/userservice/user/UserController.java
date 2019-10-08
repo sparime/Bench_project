@@ -1,5 +1,6 @@
 package com.tdd.demo.userservice.user;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.tdd.demo.userservice.PostServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,13 @@ public class UserController {
     private PostServiceProxy proxy;
 
     // gets
+    @HystrixCommand(fallbackMethod = "fallbackdefaultFallbackMethod")
+    @GetMapping("/users-hystrix-demo")
+    public SUser getAllUsersHystrixDemo() {
+        throw new RuntimeException("Hystrix demo");
+    }
+
+
     @GetMapping("/users")
     public List<SUser> getAllUsers(){
         return userService.getAllUsers();
@@ -70,5 +78,10 @@ public class UserController {
     public List<PostBean> getAllPostsOfAllUser(@PathVariable("userId") int userId) {
         List<PostBean> response = proxy.getAllPostsOfAllUser(userId);
         return response;
+    }
+
+    // customize this method to handle different scenarios
+    public SUser fallbackdefaultFallbackMethod() {
+        return new SUser("Ghost User - Service unavailable");
     }
 }
