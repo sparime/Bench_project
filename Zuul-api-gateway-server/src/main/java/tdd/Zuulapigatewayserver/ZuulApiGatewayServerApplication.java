@@ -10,8 +10,12 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableDiscoveryClient
 public class ZuulApiGatewayServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ZuulApiGatewayServerApplication.class, args);
-	}
+    // to run a request through Zuul API server
+    // http://localhost:8765/{app name}/{uri}
+    // eg: http://localhost:8765/user-service/users/10/posts/
+    public static void main(String[] args) {
+        SpringApplication.run(ZuulApiGatewayServerApplication.class, args);
+    }
+
 
 }
